@@ -7,8 +7,7 @@ interface Props{
 }
 
 function GlobalStyleProvider({children}: Props) {
-    return  <GlobalStyles>{children}</GlobalStyles>          
-    ;
+    return  <GlobalStyles>{children}</GlobalStyles>;
 }
 
 const GlobalStyles = styled.div `
