@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import GlobalStyleProvider from "./providers/GlobalStyleProvider";
@@ -11,12 +11,15 @@ import {
   SignedOut,
   UserButton,
   useAuth,
-  
-  
-} from '@clerk/nextjs';
+} from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
-const inter = Inter({ subsets: ["latin"] });
+import NextTopLoader from "nextjs-toploader";
+
+const nunito = Nunito({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,7 +31,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const { userId } = auth();
 
   return (
@@ -43,7 +45,13 @@ export default function RootLayout({
             referrerPolicy="no-referrer"
           />
         </head>
-        <body className={inter.className}>
+        <body className={nunito.className}>
+          <NextTopLoader 
+          height={2}
+          color="#27AE60"
+          easing="cubic-bezier(0.53, 0.21, 0, 1)"
+          showSpinner={false}
+          />
           <ContextProvider>
             <GlobalStyleProvider>
               {userId && <Sidebar />}
