@@ -62,7 +62,7 @@ export async function GET(req: Request) {
             },
         });
 
-        console.log("TASKS:", tasks);
+        
         return NextResponse.json(tasks);
 
     } catch (error) {

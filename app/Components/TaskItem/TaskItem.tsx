@@ -14,13 +14,13 @@ interface Props {
 }
 
 function TaskItem({ title, description, date, isCompleted, id }: Props) {
-  const { theme } = useGlobalState();
+  const { theme, deleteTask } = useGlobalState();
 
   return (
     <TaskItemStyled theme={theme}>
       <h1>{title}</h1>
       <p>{description}</p>
-      <p className="date">{formatDate( date )}</p>
+      <p className="date">{formatDate(date)}</p>
       <div className="task-footer">
         {isCompleted ? (
           <button className="completed">Completed</button>
@@ -28,7 +28,14 @@ function TaskItem({ title, description, date, isCompleted, id }: Props) {
           <button className="incomplete">Incomplete</button>
         )}
         <button className="edit">{edit}</button>
-        <button className="delete">{trash}</button>
+        <button
+          className="delete"
+          onClick={() => {
+            deleteTask(id);
+          }}
+        >
+          {trash}
+        </button>
       </div>
     </TaskItemStyled>
   );
@@ -50,7 +57,7 @@ const TaskItemStyled = styled.div`
     margin-top: auto;
   }
 
-  >h1{
+  > h1 {
     font-size: 1.5rem;
     font-weight: 600;
   }
@@ -65,13 +72,13 @@ const TaskItemStyled = styled.div`
       outline: none;
       cursor: pointer;
 
-      i{
+      i {
         font-size: 1.4rem;
         color: ${(props) => props.theme.colorGrey2};
       }
     }
 
-    .edit{
+    .edit {
       margin-left: auto;
     }
 
@@ -84,9 +91,8 @@ const TaskItemStyled = styled.div`
     }
 
     .completed {
-      background-color: ${(props) => props.theme.GreenDark};
+      background-color: ${(props) => props.theme.colorGreenDark} !important;
     }
-    
   }
 `;
 
